@@ -29,4 +29,11 @@ public class NewsExpirationScheduler {
         LocalDate localDate = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         newsRepository.softDeleteExpiredNews(localDate);
     }
+
+
+/**
+    We Can Also add scheduled for truncate blacklisted_token table at the end of the day based on another flag.
+ */
+
+
 }
