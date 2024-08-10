@@ -21,7 +21,7 @@ public class NewsExpirationScheduler {
     @Autowired
     private NewsRepository newsRepository;
 
-    // Run every day at midnight
+    // Run every 2 min
     @Scheduled(cron = "0 */2 * * * ?")
     public void markExpiredNewsAsDeleted() {
         logger.info("Running method: markExpiredNewsAsDeleted");

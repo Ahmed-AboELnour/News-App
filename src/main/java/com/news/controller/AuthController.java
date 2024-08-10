@@ -88,7 +88,6 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
-        // Invalidate JWT token (in practice, you may want to use a blacklist)
         String token = request.getHeader("Authorization").substring(7);
         Date expiryDate = jwtUtil.getClaimsFromToken(token).getExpiration();
         SecurityContextHolder.clearContext();

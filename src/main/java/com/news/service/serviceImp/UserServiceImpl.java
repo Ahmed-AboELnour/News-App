@@ -3,7 +3,6 @@ package com.news.service.serviceImp;
 import com.news.entity.User;
 import com.news.exception.ResourceNotFoundException;
 import com.news.model.UserDto;
-import com.news.model.UserRole;
 import com.news.repository.UserRepository;
 import com.news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
