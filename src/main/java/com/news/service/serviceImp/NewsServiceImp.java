@@ -48,7 +48,7 @@ public class NewsServiceImp implements NewsService {
     }
 
     public List<News> getAllNews() {
-        return newsRepository.findByStatus(NewsStatus.APPROVED);
+        return newsRepository.findByStatusAndSoftDeleted(NewsStatus.APPROVED,true);
     }
 
     public void approveNews(Long id) {
@@ -64,7 +64,7 @@ public class NewsServiceImp implements NewsService {
     }
 
     public void autoDeleteExpiredNews() {
-        List<News> newsList = newsRepository.findByStatus(NewsStatus.APPROVED);
+        List<News> newsList = newsRepository.findByStatusAndSoftDeleted(NewsStatus.APPROVED,false);
         newsList.stream()
                 .filter(news -> news.getPublishDate().isBefore(LocalDate.now()))
                 .forEach(news -> news.setStatus(NewsStatus.DELETED));
