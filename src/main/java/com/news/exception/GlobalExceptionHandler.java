@@ -30,4 +30,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+//    @ExceptionHandler(UserAlreadyExistsException.class)
+//    @ResponseStatus(HttpStatus.CONFLICT)
+//    public String handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+//        return ex.getMessage();
+//    }
 }

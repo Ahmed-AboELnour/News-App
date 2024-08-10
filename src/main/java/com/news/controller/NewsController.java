@@ -44,7 +44,7 @@ public class NewsController {
     }
 
     @PostMapping("/approve/{id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_CONTENT_WRITER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void approveNews(@PathVariable Long id) {
         newsService.approveNews(id);
     }

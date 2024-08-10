@@ -32,17 +32,18 @@ public class NewsServiceImp implements NewsService {
         existingNews.setDescription(news.getDescription() == null ? existingNews.getDescription() : news.getDescription());
         existingNews.setDescriptionArabic(news.getDescriptionArabic() == null ? existingNews.getDescriptionArabic() : news.getDescriptionArabic());
         existingNews.setPublishDate(news.getPublishDate() == null ? existingNews.getPublishDate() : news.getPublishDate());
-        existingNews.setStatus(news.getStatus() == null ? existingNews.getStatus() : news.getStatus());
+        existingNews.setStatus(NewsStatus.PENDING);
         existingNews.setImageUrl(news.getImageUrl() == null ? existingNews.getImageUrl() : news.getImageUrl());
         return newsRepository.save(existingNews);
     }
 
     public void deleteNews(Long id) {
-        News news = newsRepository.findById(id).orElseThrow();
+        News news = newsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("News not found with id: " + id));
         if (news.getStatus() == NewsStatus.PENDING) {
             newsRepository.deleteById(id);
         } else {
-            // Handle deletion approval
+            throw new ResourceNotFoundException("News should get approval from Admin: " + id);
         }
     }
 
@@ -51,7 +52,8 @@ public class NewsServiceImp implements NewsService {
     }
 
     public void approveNews(Long id) {
-        News news = newsRepository.findById(id).orElseThrow();
+        News news = newsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("News not found with id: " + id));
         news.setStatus(NewsStatus.APPROVED);
         newsRepository.save(news);
     }

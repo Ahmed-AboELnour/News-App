@@ -44,23 +44,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@Valid @RequestBody UserDto userDto) {
-        // Check if user already exists
-        if (userService.getUserByEmail(userDto.getEmail()).isPresent()) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User already exists");
-            return ResponseEntity.badRequest().body(response);
-        }
-
-        // Create new user
-        User user = new User();
-        user.setFullName(userDto.getFullName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setDateOfBirth(userDto.getDateOfBirth());
-        user.setRole(UserRole.ROLE_NORMAL);
-
-        userService.createUser(user);
-
+        userService.signUp(userDto);
         Map<String, String> response = new HashMap<>();
         response.put("message", "User registered successfully");
         return ResponseEntity.ok(response);

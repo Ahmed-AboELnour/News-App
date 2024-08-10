@@ -1,6 +1,7 @@
 package com.news.controller;
 
 import com.news.entity.User;
+import com.news.model.UserDto;
 import com.news.service.serviceImp.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ public class UserController {
 
     @PostMapping
 
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody UserDto user) {
         return userService.createUser(user);
     }
 
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @RequestBody UserDto user) {
         return userService.updateUser(id, user);
     }
 
